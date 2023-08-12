@@ -1,12 +1,14 @@
+using AppTime.ViewModels;
 using Avalonia.Controls;
 
 namespace AppTime.Views
 {
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainWindowViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }
