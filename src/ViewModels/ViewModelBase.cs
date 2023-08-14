@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace AppTime.ViewModels
 {
-    public class ViewModelBase : ObservableObject
+    public class ViewModelBase : ObservableObject, IDisposable
     {
         protected bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
@@ -12,5 +13,7 @@ namespace AppTime.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+
+        public virtual void Dispose() { }
     }
 }
