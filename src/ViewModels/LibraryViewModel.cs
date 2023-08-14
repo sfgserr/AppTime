@@ -13,14 +13,6 @@ namespace AppTime.ViewModels
 
         public ObservableCollection<AppProcess> Processes { get; set; } = new ObservableCollection<AppProcess>();
 
-        private string _greet = "HI";
-
-        public string Greet
-        {
-            get => _greet;
-            set => Set(ref _greet, value);
-        }
-
         public override void Dispose()
         {
             Processes.CollectionChanged -= OnCollectionChanged;

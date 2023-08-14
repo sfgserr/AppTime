@@ -46,7 +46,7 @@ namespace AppTime
                        services.AddScoped<LibraryViewModel>();
                        services.AddSingleton<INavigator, Navigator>();
                        services.AddSingleton<IViewModelFactory, ViewModelFactory>();
-                       services.AddSingleton<ViewMapper>(s => new ViewMapper(s));
+                       services.AddSingleton<ViewMapper>();
                    });
     }
 }

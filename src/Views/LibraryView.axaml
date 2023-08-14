@@ -4,9 +4,10 @@
              xmlns:vm="using:AppTime.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="AppTime.Views.LibraryView">
+             x:Class="AppTime.Views.LibraryView"
+             x:DataType="vm:LibraryViewModel">
 
-  <TextBlock Text="{Binding Greet}">
+  <TextBlock Text="{Binding Path=Text}">
     
   </TextBlock>
       

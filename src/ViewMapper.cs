@@ -2,18 +2,17 @@
 using AppTime.Views;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace AppTime
 {
     public class ViewMapper : IDataTemplate
     {
-        private readonly IServiceProvider _services;
+        private readonly LibraryView _library;
 
-        public ViewMapper(IServiceProvider services)
+        public ViewMapper(LibraryView library)
         {
-            _services = services;
+            _library = library;
         }
 
         public Control? Build(object param)
@@ -25,7 +24,7 @@ namespace AppTime
             {
                 return type.Name switch
                 {
-                    "LibraryView" => (Control)_services.GetRequiredService<LibraryView>()
+                    "LibraryView" => (Control)_library
                 };
             }
 
