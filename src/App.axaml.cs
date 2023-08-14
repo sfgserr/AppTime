@@ -8,7 +8,6 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 
 namespace AppTime
 {
@@ -29,6 +28,8 @@ namespace AppTime
 
                 BindingPlugins.DataValidators.RemoveAt(0);
                 desktop.MainWindow = _host.Services.GetRequiredService<MainWindow>();
+
+                DataTemplates.Add(_host.Services.GetRequiredService<ViewMapper>());
             }
 
             base.OnFrameworkInitializationCompleted();
@@ -45,7 +46,7 @@ namespace AppTime
                        services.AddScoped<LibraryViewModel>();
                        services.AddSingleton<INavigator, Navigator>();
                        services.AddSingleton<IViewModelFactory, ViewModelFactory>();
-                       services.AddSingleton<ViewLocator>(s => new ViewLocator(s));
+                       services.AddSingleton<ViewMapper>(s => new ViewMapper(s));
                    });
     }
 }
