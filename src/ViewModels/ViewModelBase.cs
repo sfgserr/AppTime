@@ -4,6 +4,8 @@ using System.Runtime.CompilerServices;
 
 namespace AppTime.ViewModels
 {
+    public delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : ViewModelBase;
+
     public class ViewModelBase : ObservableObject, IDisposable
     {
         protected bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)

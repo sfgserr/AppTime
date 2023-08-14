@@ -1,5 +1,6 @@
 using AppTime.Stores.Navigators;
 using AppTime.ViewModels;
+using AppTime.ViewModels.Factories;
 using AppTime.Views;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -38,8 +39,13 @@ namespace AppTime
                    .ConfigureServices((context, services) =>
                    {
                        services.AddSingleton<MainWindow>();
+                       services.AddSingleton<LibraryView>();
                        services.AddSingleton<MainWindowViewModel>();
+                       services.AddSingleton<CreateViewModel<LibraryViewModel>>(s => () => s.GetRequiredService<LibraryViewModel>());
+                       services.AddScoped<LibraryViewModel>();
                        services.AddSingleton<INavigator, Navigator>();
+                       services.AddSingleton<IViewModelFactory, ViewModelFactory>();
+                       services.AddSingleton<ViewLocator>(s => new ViewLocator(s));
                    });
     }
 }

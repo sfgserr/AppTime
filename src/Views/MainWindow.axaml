@@ -9,6 +9,6 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="AppTime">
 
-  <TransitioningContentControl Content="{Binding CurrentView}"/>
+  <ContentControl Content="{Binding CurrentView}"/>
   
 </Window>
