@@ -9,16 +9,26 @@
   <Grid>
     <ListBox ItemsSource="{Binding Processes}"
              Background="Gray"
-             Height="700"
-             Width="800"
-             CornerRadius="10">
+             CornerRadius="10"
+             Margin="15, 20">
       
       <ListBox.ItemTemplate>
         <DataTemplate>
-          <Border Background="Gray"
-                  Height="70"
-                  Width="750">
-            
+          <Border Background="DarkGray"
+                  Padding="10, 30"
+                  Margin="0,15,0,0"
+                  CornerRadius="10">
+            <StackPanel Orientation="Horizontal">
+              <Border Background="Transparent"
+                      BorderBrush="Black"
+                      BorderThickness="2"
+                      Height="40"
+                      Width="40"
+                      CornerRadius="10"
+                      Margin="80,0,0,0">
+                
+              </Border>
+            </StackPanel>
           </Border>
         </DataTemplate>
       </ListBox.ItemTemplate>
