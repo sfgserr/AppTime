@@ -39,8 +39,8 @@ namespace AppTime
             => Host.CreateDefaultBuilder()
                    .ConfigureServices((context, services) =>
                    {
-                       services.AddSingleton<MainWindow>();
-                       services.AddSingleton<LibraryView>();
+                       services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<MainWindowViewModel>()));
+                       services.AddSingleton<LibraryView>(s => new LibraryView(s.GetRequiredService<LibraryViewModel>()));
                        services.AddSingleton<MainWindowViewModel>();
                        services.AddSingleton<CreateViewModel<LibraryViewModel>>(s => () => s.GetRequiredService<LibraryViewModel>());
                        services.AddScoped<LibraryViewModel>();
