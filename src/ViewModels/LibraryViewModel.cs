@@ -9,22 +9,23 @@ namespace AppTime.ViewModels
     {
         public LibraryViewModel()
         {
-            Processes.CollectionChanged += OnCollectionChanged;
+            TrackedProcesses.CollectionChanged += OnCollectionChanged;
         }
 
-        public ObservableCollection<AppProcess> Processes { get; set; } = new ObservableCollection<AppProcess>() { new AppProcess() { IsRunning = false, TimeSpentInMs = 0, Name = "Process" } };
+        public ObservableCollection<AppProcess> TrackedProcesses { get; set; } = new ObservableCollection<AppProcess>() { new AppProcess() { IsRunning = false, TimeSpentInMs = 0, Name = "Process" } };
+        public ObservableCollection<AppProcess> CurrentProcceses { get; set; } = new ObservableCollection<AppProcess>();
         public string Greet => "sdsd";
 
         public override void Dispose()
         {
-            Processes.CollectionChanged -= OnCollectionChanged;
+            TrackedProcesses.CollectionChanged -= OnCollectionChanged;
 
             base.Dispose();
         }
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(Processes));
+            OnPropertyChanged(nameof(TrackedProcesses));
         }
     }
 }
