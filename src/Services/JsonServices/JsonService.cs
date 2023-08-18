@@ -8,6 +8,9 @@ namespace AppTime.Services.JsonServices
     {
         public async Task SerializeAsync<T>(T obj, string path)
         {
+            if (File.Exists(path))
+                await File.WriteAllTextAsync(path, "");
+
             using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
             {
                 await JsonSerializer.SerializeAsync(fs, obj);

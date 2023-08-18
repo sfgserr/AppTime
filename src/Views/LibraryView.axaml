@@ -47,7 +47,7 @@
                 <TextBlock FontSize="14"
                            FontFamily="Montserrat"
                            Margin="20,0,0,0"
-                           Text="{Binding TimeSpentInMs}"
+                           Text="{Binding TimeSpentInSeconds}"
                            VerticalAlignment="Center"/>
               </StackPanel>
             </Border>
