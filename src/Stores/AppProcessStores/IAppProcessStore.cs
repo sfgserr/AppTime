@@ -7,6 +7,6 @@ namespace AppTime.Stores.AppProcessStores
     {
         void UpdateState();
 
-        void AddProcess(string processName);
+        void AddProcess(string processName, string processFileName);
     }
 }

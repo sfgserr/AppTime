@@ -28,7 +28,7 @@ namespace AppTime.Commands
 
         public void Execute(object? parameter)
         {
-            _appProcessStore.AddProcess(_viewModel.SelectedProcess.ProcessName);
+            _appProcessStore.AddProcess(_viewModel.SelectedProcess.ProcessName, _viewModel.SelectedProcess.MainModule.FileName);
         }
 
         private void OnCanExecuteChanged(object? sender, PropertyChangedEventArgs e)
