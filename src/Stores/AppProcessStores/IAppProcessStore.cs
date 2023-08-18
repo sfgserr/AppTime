@@ -1,4 +1,5 @@
 ﻿using AppTime.Models;
+using Avalonia.Media.Imaging;
 using System.Collections.Generic;
 
 namespace AppTime.Stores.AppProcessStores
@@ -7,6 +8,6 @@ namespace AppTime.Stores.AppProcessStores
     {
         void UpdateState();
 
-        void AddProcess(string processName, string processFileName);
+        void AddProcess(string processName, string processFileName, Bitmap icon);
     }
 }

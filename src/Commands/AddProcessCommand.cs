@@ -1,5 +1,7 @@
-﻿using AppTime.Stores.AppProcessStores;
+﻿using AppTime.Services.AppProcessServices;
+using AppTime.Stores.AppProcessStores;
 using AppTime.ViewModels;
+using Avalonia.Media.Imaging;
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -12,13 +14,15 @@ namespace AppTime.Commands
 
         private readonly LibraryViewModel _viewModel;
         private readonly IAppProcessStore _appProcessStore;
+        private readonly IAppProcessService _appProcessService;
 
-        public AddProcessCommand(LibraryViewModel viewModel, IAppProcessStore appProcessStore)
+        public AddProcessCommand(LibraryViewModel viewModel, IAppProcessStore appProcessStore, IAppProcessService appProcessService)
         {
             _viewModel = viewModel;
             _viewModel.PropertyChanged += OnCanExecuteChanged;
 
             _appProcessStore = appProcessStore;
+            _appProcessService = appProcessService;
         }
 
         public bool CanExecute(object? parameter)
@@ -28,7 +32,9 @@ namespace AppTime.Commands
 
         public void Execute(object? parameter)
         {
-            _appProcessStore.AddProcess(_viewModel.SelectedProcess.ProcessName, _viewModel.SelectedProcess.MainModule.FileName);
+            string fileName = _viewModel.SelectedProcess.MainModule.FileName;
+            Bitmap icon = _appProcessService.GetProcessIconByName(fileName);
+            _appProcessStore.AddProcess(_viewModel.SelectedProcess.ProcessName, fileName, icon);
         }
 
         private void OnCanExecuteChanged(object? sender, PropertyChangedEventArgs e)

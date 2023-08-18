@@ -12,5 +12,7 @@ namespace AppTime.Services.AppProcessServices
         Task<List<AppProcess>> GetTrackedProcesses();
 
         Task SaveProcesses();
+
+        Avalonia.Media.Imaging.Bitmap GetProcessIconByName(string processFileName);
     }
 }

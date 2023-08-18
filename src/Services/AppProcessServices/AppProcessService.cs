@@ -5,6 +5,9 @@ using AppTime.Models;
 using System.Threading.Tasks;
 using AppTime.Services.JsonServices;
 using AppTime.Stores.StateSerializers;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.IO;
 
 namespace AppTime.Services.AppProcessServices
 {
@@ -21,6 +24,19 @@ namespace AppTime.Services.AppProcessServices
             _stateSerializer = stateSerializer;
         }
 
+        public Avalonia.Media.Imaging.Bitmap GetProcessIconByName(string processFileName)
+        {
+            Bitmap icon = Icon.ExtractAssociatedIcon(processFileName).ToBitmap();
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                icon.Save(ms, ImageFormat.Png);
+                ms.Position = 0;
+
+                return new Avalonia.Media.Imaging.Bitmap(ms);
+            }
+        }
+
         public List<Process> GetCurrentProcesses()
         {
             return Process.GetProcesses()
@@ -32,10 +48,12 @@ namespace AppTime.Services.AppProcessServices
         {
             try
             {
-                return await _jsonService.DeserializeAsync<List<AppProcess>>(_path);
+                List<AppProcess> processes = await _jsonService.DeserializeAsync<List<AppProcess>>(_path);
+                processes.ForEach(p => p.Icon = GetProcessIconByName(p.FileName));
+                return processes;
             }
             catch
-            {
+            {   
                 return null;
             }
         }

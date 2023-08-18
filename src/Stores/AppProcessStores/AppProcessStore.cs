@@ -1,9 +1,8 @@
 ﻿using AppTime.Models;
+using AppTime.Services.AppProcessServices;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
+using Avalonia.Media.Imaging;
 
 namespace AppTime.Stores.AppProcessStores
 {
@@ -28,19 +27,14 @@ namespace AppTime.Stores.AppProcessStores
             StateChanged?.Invoke();
         }
 
-        public void AddProcess(string processName, string processFileName)
+        public void AddProcess(string processName, string processFileName, Bitmap icon)
         {
-            Bitmap icon = Icon.ExtractAssociatedIcon(processFileName).ToBitmap();
-
-            AppProcess process = new AppProcess() { Name = processName };
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                icon.Save(ms, ImageFormat.Png);
-                ms.Position = 0;
-
-                process.Icon = new Avalonia.Media.Imaging.Bitmap(ms);
-            }
+            AppProcess process = new AppProcess() 
+            { 
+                Name = processName, 
+                FileName = processFileName, 
+                Icon = icon 
+            };
 
             State.Add(process);
 

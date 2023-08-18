@@ -30,7 +30,7 @@ namespace AppTime.ViewModels
             GetTrackedProcessesCommand = new GetTrackedProcessesCommand(appProcessService, _appProcessStore);
             GetTrackedProcessesCommand.Execute(null);
 
-            AddProcessCommand = new AddProcessCommand(this, appProcessStore);
+            AddProcessCommand = new AddProcessCommand(this, appProcessStore, appProcessService);
         }
 
         public ICommand GetCurrentProcessesCommand { get; }
