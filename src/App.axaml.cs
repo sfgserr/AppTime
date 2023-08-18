@@ -1,3 +1,7 @@
+using AppTime.BackgroundWorkers;
+using AppTime.Services.AppProcessServices;
+using AppTime.Services.JsonServices;
+using AppTime.Stores.AppProcessStores;
 using AppTime.Stores.Navigators;
 using AppTime.ViewModels;
 using AppTime.ViewModels.Factories;
@@ -39,14 +43,18 @@ namespace AppTime
             => Host.CreateDefaultBuilder()
                    .ConfigureServices((context, services) =>
                    {
-                       services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<MainWindowViewModel>()));
-                       services.AddSingleton<LibraryView>(s => new LibraryView(s.GetRequiredService<LibraryViewModel>()));
+                       services.AddSingleton<MainWindow>();
+                       services.AddSingleton<LibraryView>();
                        services.AddSingleton<MainWindowViewModel>();
                        services.AddSingleton<CreateViewModel<LibraryViewModel>>(s => () => s.GetRequiredService<LibraryViewModel>());
                        services.AddScoped<LibraryViewModel>();
                        services.AddSingleton<INavigator, Navigator>();
                        services.AddSingleton<IViewModelFactory, ViewModelFactory>();
                        services.AddSingleton<ViewMapper>();
+                       services.AddSingleton<IAppProcessService, AppProcessService>();
+                       services.AddSingleton<IJsonService, JsonService>();
+                       services.AddSingleton<IAppProcessStore, AppProcessStore>();
+                       services.AddSingleton<SpendTimeWorker>();
                    });
     }
 }
