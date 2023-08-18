@@ -38,6 +38,7 @@ namespace AppTime.ViewModels
         public ICommand AddProcessCommand { get; }
         public ObservableCollection<AppProcess> TrackedProcesses => new ObservableCollection<AppProcess>(_appProcessStore.State);
         public List<Process> CurrentProcesses { get; set; } = new List<Process>();
+        public bool CanAddProcess => SelectedProcess != null;
 
         private Process _selectedProcess;
 
@@ -47,6 +48,7 @@ namespace AppTime.ViewModels
             set
             {
                 Set(ref _selectedProcess, value);
+                OnPropertyChanged(nameof(CanAddProcess));
             }
         }
 
