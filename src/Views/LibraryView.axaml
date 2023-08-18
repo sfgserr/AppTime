@@ -93,6 +93,7 @@
               </Style>
             </Button.Styles>
           </Button>
+          
         </Grid>
         
         <ListBox ItemsSource="{Binding CurrentProcesses}"
@@ -111,7 +112,38 @@
             </DataTemplate>
           </ListBox.ItemTemplate>
         </ListBox>
-        
+
+        <Button Width="75"
+                Height="40"
+                Content="Update"
+                HorizontalAlignment="Right"
+                Margin="0,10,0,0"
+                Command="{Binding GetCurrentProcessesCommand}">
+
+          <Button.Styles>
+            <Style Selector="Button">
+              <Setter Property="Template">
+                <Setter.Value>
+                  <ControlTemplate TargetType="Button">
+                    <Border Height="{TemplateBinding Height}"
+                            Width="{TemplateBinding Width}"
+                            BorderThickness="0"
+                            Background="DarkGray"
+                            CornerRadius="5">
+
+                      <TextBlock FontSize="13"
+                                 Foreground="White"
+                                 Text="{TemplateBinding Property=Content}"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"/>
+                    </Border>
+                  </ControlTemplate>
+                </Setter.Value>
+              </Setter>
+            </Style>
+          </Button.Styles>
+        </Button>
+
       </StackPanel>
     </Border>
   </Grid>
