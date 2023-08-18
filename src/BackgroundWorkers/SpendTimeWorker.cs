@@ -1,10 +1,8 @@
-﻿using AppTime.Models;
-using AppTime.Services.AppProcessServices;
+﻿using AppTime.Services.AppProcessServices;
 using AppTime.Stores.AppProcessStores;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AppTime.BackgroundWorkers
 {

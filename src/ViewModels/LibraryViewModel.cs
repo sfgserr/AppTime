@@ -57,8 +57,11 @@ namespace AppTime.ViewModels
         {
             if (_count < TrackedProcesses.Count)
             {
+                for (int i = _count; i < TrackedProcesses.Count; i++) 
+                {
+                    _worker.StartWork(i);
+                }
                 _count = TrackedProcesses.Count;
-                _worker.StartWork(_count-1);
             }
 
             OnPropertyChanged(nameof(TrackedProcesses));
