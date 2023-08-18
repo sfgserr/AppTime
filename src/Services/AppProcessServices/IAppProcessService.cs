@@ -10,5 +10,7 @@ namespace AppTime.Services.AppProcessServices
         List<Process> GetCurrentProcesses();
 
         Task<List<AppProcess>> GetTrackedProcesses();
+
+        Task SaveProcesses();
     }
 }

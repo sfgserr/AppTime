@@ -9,6 +9,7 @@ namespace AppTime.Views
         {
             InitializeComponent();
             DataContext = vm;
+            Closed += (s, e) => vm.OnClosed();
         }
     }
 }

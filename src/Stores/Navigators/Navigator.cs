@@ -9,7 +9,7 @@ namespace AppTime.Stores.Navigators
 
         private ViewModelBase _currentViewModel;
 
-        public ViewModelBase CurrentViewModel 
+        public ViewModelBase State 
         { 
             get => _currentViewModel;
             set 

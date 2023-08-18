@@ -31,9 +31,9 @@ namespace AppTime.BackgroundWorkers
 
             while (true)
             {
-                if (_appProcessService.GetCurrentProcesses().Any(pr => pr.ProcessName == _appProcessStore.AppProcesses[index].Name))
+                if (_appProcessService.GetCurrentProcesses().Any(pr => pr.ProcessName == _appProcessStore.State[index].Name))
                 {
-                    _appProcessStore.AppProcesses[index].TimeSpentInMs += 1;
+                    _appProcessStore.State[index].TimeSpentInSeconds += 1;
                     _appProcessStore.UpdateState();
                     Thread.Sleep(1000);
                 }

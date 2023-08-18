@@ -7,8 +7,8 @@ namespace AppTime.Stores.Navigators
         Library
     }
 
-    public interface INavigator : IStore
+    public interface INavigator : IStore<ViewModelBase>
     {
-        ViewModelBase CurrentViewModel { get; set; }
+        
     }
 }

@@ -1,8 +1,10 @@
 using AppTime.BackgroundWorkers;
+using AppTime.Models;
 using AppTime.Services.AppProcessServices;
 using AppTime.Services.JsonServices;
 using AppTime.Stores.AppProcessStores;
 using AppTime.Stores.Navigators;
+using AppTime.Stores.StateSerializers;
 using AppTime.ViewModels;
 using AppTime.ViewModels.Factories;
 using AppTime.Views;
@@ -12,6 +14,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 
 namespace AppTime
 {
@@ -51,9 +54,10 @@ namespace AppTime
                        services.AddSingleton<INavigator, Navigator>();
                        services.AddSingleton<IViewModelFactory, ViewModelFactory>();
                        services.AddSingleton<ViewMapper>();
-                       services.AddSingleton<IAppProcessService, AppProcessService>();
+                       services.AddSingleton<IAppProcessService, AppProcessService>(s => new AppProcessService(s.GetRequiredService<IJsonService>(), s.GetRequiredService<StateSerializer<List<AppProcess>>>()));
                        services.AddSingleton<IJsonService, JsonService>();
                        services.AddSingleton<IAppProcessStore, AppProcessStore>();
+                       services.AddSingleton<StateSerializer<List<AppProcess>>>(s => new StateSerializer<List<AppProcess>>(s.GetRequiredService<IAppProcessStore>(), s.GetRequiredService<IJsonService>()));
                        services.AddSingleton<SpendTimeWorker>();
                    });
     }

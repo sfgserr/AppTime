@@ -27,7 +27,7 @@ namespace AppTime.Commands
         {
             if (parameter is ViewType viewType)
             {
-                _navigator.CurrentViewModel = _factory.CreateViewModel(viewType);
+                _navigator.State = _factory.CreateViewModel(viewType);
             }
         }
     }

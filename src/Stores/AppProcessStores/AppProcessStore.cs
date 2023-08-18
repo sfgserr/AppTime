@@ -1,5 +1,4 @@
 ﻿using AppTime.Models;
-using AppTime.Services.AppProcessServices;
 using System;
 using System.Collections.Generic;
 
@@ -9,18 +8,9 @@ namespace AppTime.Stores.AppProcessStores
     {
         public event Action StateChanged;
 
-        private readonly IAppProcessService _appProcessService;
-
-        public AppProcessStore(IAppProcessService appProcessService)
-        {
-            _appProcessService = appProcessService;
-
-            GetProcesses();
-        }
-
         private List<AppProcess> _appProcesses = new List<AppProcess>();
 
-        public List<AppProcess> AppProcesses
+        public List<AppProcess> State
         {
             get => _appProcesses;
             set
@@ -37,14 +27,9 @@ namespace AppTime.Stores.AppProcessStores
 
         public void AddProcess(string processName)
         {
-            AppProcesses.Add(new AppProcess() { Name = processName });
+            State.Add(new AppProcess() { Name = processName });
 
             StateChanged?.Invoke();
-        }
-
-        private async void GetProcesses()
-        {
-            AppProcesses = await _appProcessService.GetTrackedProcesses() ?? new List<AppProcess>();
         }
     }
 }

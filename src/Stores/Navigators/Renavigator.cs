@@ -15,7 +15,7 @@ namespace AppTime.Stores.Navigators
 
         public void Navigate()
         {
-            _navigator.CurrentViewModel = _createViewModel();
+            _navigator.State = _createViewModel();
         }
     }
 }
