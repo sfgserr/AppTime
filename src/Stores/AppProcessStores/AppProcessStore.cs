@@ -3,6 +3,7 @@ using AppTime.Services.AppProcessServices;
 using System;
 using System.Collections.Generic;
 using Avalonia.Media.Imaging;
+using System.Linq;
 
 namespace AppTime.Stores.AppProcessStores
 {
@@ -36,8 +37,19 @@ namespace AppTime.Stores.AppProcessStores
                 Icon = icon 
             };
 
+            if (State.Any(p => p.Name == process.Name))
+                return;
+
             State.Add(process);
 
+            StateChanged?.Invoke();
+        }
+
+        public void RemoveProcess(string processName)
+        {
+            AppProcess processToRemove = State.FirstOrDefault(p => p.Name == processName);
+
+            State.Remove(processToRemove);
             StateChanged?.Invoke();
         }
     }

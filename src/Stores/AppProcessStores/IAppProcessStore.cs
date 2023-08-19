@@ -9,5 +9,7 @@ namespace AppTime.Stores.AppProcessStores
         void UpdateState();
 
         void AddProcess(string processName, string processFileName, Bitmap icon);
+
+        void RemoveProcess(string processName);
     }
 }

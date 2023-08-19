@@ -31,8 +31,11 @@ namespace AppTime.BackgroundWorkers
 
             while (true)
             {
+                if (index >= _appProcessStore.State.Count)
+                    break;
+
                 if (_appProcessService.GetCurrentProcesses().Any(pr => pr.ProcessName == _appProcessStore.State[index].Name))
-                {
+                {   
                     _appProcessStore.State[index].AddTime(1);
                     _appProcessStore.UpdateState();
                     Thread.Sleep(900);

@@ -31,13 +31,16 @@ namespace AppTime.ViewModels
             GetTrackedProcessesCommand.Execute(null);
 
             AddProcessCommand = new AddProcessCommand(this, appProcessStore, appProcessService);
+            RemoveProcessCommand = new RemoveProcessCommand(_appProcessStore, this);
         }
 
         public ICommand GetCurrentProcessesCommand { get; }
         public ICommand GetTrackedProcessesCommand { get; }
         public ICommand AddProcessCommand { get; }
+        public ICommand RemoveProcessCommand { get; }
         public ObservableCollection<AppProcess> TrackedProcesses => new ObservableCollection<AppProcess>(_appProcessStore.State);
         public bool CanAddProcess => SelectedProcess != null;
+        public bool CanRemoveProcess => SelectedTrackedProcess != null;
 
         private List<Process> _currentProcesses = new List<Process>();
 
@@ -59,6 +62,18 @@ namespace AppTime.ViewModels
             }
         }
 
+        private AppProcess _selectedTrackedProcess;
+
+        public AppProcess SelectedTrackedProcess
+        {
+            get => _selectedTrackedProcess;
+            set
+            {
+                Set(ref _selectedTrackedProcess, value);
+                OnPropertyChanged(nameof(CanRemoveProcess));
+            }
+        }
+
         public override void Dispose()
         {
             _appProcessStore.StateChanged -= OnCollectionChanged;
@@ -74,9 +89,9 @@ namespace AppTime.ViewModels
                 {
                     _worker.StartWork(i);
                 }
-                _count = TrackedProcesses.Count;
             }
 
+            _count = TrackedProcesses.Count;
             OnPropertyChanged(nameof(TrackedProcesses));
         }
     }

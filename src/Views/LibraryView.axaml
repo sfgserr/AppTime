@@ -7,54 +7,87 @@
              x:Class="AppTime.Views.LibraryView">
 
   <Grid ColumnDefinitions="700*,700*">
-    <Border Grid.Column="0"
-            Padding="25,50">
-      
-      <ListBox ItemsSource="{Binding TrackedProcesses}"
-               Background="Gray"
-               CornerRadius="10"
-               SelectionMode="Single">
 
-        <ListBox.Styles>
-          <Style Selector="ListBoxItem">
-            
-          </Style>
-        </ListBox.Styles>
-        <ListBox.ItemTemplate>
-          <DataTemplate>
-            <Border Background="DarkGray"
-                          Padding="10, 8"
-                          Margin="0,15,0,0"
-                          CornerRadius="10">
+    <Button Width="75"
+            Height="40"
+            Content="Remove"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Command="{Binding RemoveProcessCommand}"
+            Grid.Column="0">
 
-              <StackPanel Orientation="Horizontal">
-                <Border BorderThickness="0"
-                        Height="30"
-                        Width="30"
-                        CornerRadius="5"
-                        Margin="30,0,0,0">
-                  <Border.Background>
-                    <ImageBrush Source="{Binding Icon}"/>
-                  </Border.Background>
+      <Button.Styles>
+        <Style Selector="Button">
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border Height="{TemplateBinding Height}"
+                        Width="{TemplateBinding Width}"
+                        BorderThickness="0"
+                        Background="DarkGray"
+                        CornerRadius="5">
+
+                  <TextBlock FontSize="13"
+                             Foreground="White"
+                             Text="{TemplateBinding Property=Content}"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"/>
                 </Border>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </Button.Styles>
+    </Button>
+      <Border Grid.Column="0"
+              Padding="25,50">
 
-                <TextBlock FontSize="14"
-                           FontFamily="Montserrat"
-                           Margin="20,0,0,0"
-                           Text="{Binding Name}"
-                           VerticalAlignment="Center"/>
+        <ListBox ItemsSource="{Binding TrackedProcesses}"
+                 Background="Gray"
+                 CornerRadius="10"
+                 SelectionMode="Single"
+                 SelectedItem="{Binding SelectedTrackedProcess}">
 
-                <TextBlock FontSize="14"
-                           FontFamily="Montserrat"
-                           Margin="20,0,0,0"
-                           Text="{Binding SpentTime}"
-                           VerticalAlignment="Center"/>
-              </StackPanel>
-            </Border>
-          </DataTemplate>
-        </ListBox.ItemTemplate>
-      </ListBox>
-    </Border>
+          <ListBox.Styles>
+            <Style Selector="ListBoxItem">
+
+            </Style>
+          </ListBox.Styles>
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Border Background="DarkGray"
+                            Padding="10, 8"
+                            Margin="0,15,0,0"
+                            CornerRadius="10">
+
+                <StackPanel Orientation="Horizontal">
+                  <Border BorderThickness="0"
+                          Height="30"
+                          Width="30"
+                          CornerRadius="5"
+                          Margin="30,0,0,0">
+                    <Border.Background>
+                      <ImageBrush Source="{Binding Icon}"/>
+                    </Border.Background>
+                  </Border>
+
+                  <TextBlock FontSize="14"
+                             FontFamily="Montserrat"
+                             Margin="20,0,0,0"
+                             Text="{Binding Name}"
+                             VerticalAlignment="Center"/>
+
+                  <TextBlock FontSize="14"
+                             FontFamily="Montserrat"
+                             Margin="20,0,0,0"
+                             Text="{Binding SpentTime}"
+                             VerticalAlignment="Center"/>
+                </StackPanel>
+              </Border>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </Border>
     <Border Padding="25, 50"
             Grid.Column="1">
       <StackPanel>
