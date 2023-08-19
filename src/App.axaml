@@ -8,4 +8,17 @@
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>
+
+  <TrayIcon.Icons>
+    <TrayIcons>
+      <TrayIcon Icon="/Assets/icon.png" ToolTipText="AppTime" Clicked="OnIconClicked">
+        <TrayIcon.Menu>
+          <NativeMenu>
+            <NativeMenuItem Header="Exit" Click="OnExitButtonClicked"/>
+          </NativeMenu>
+        </TrayIcon.Menu>
+      </TrayIcon>
+    </TrayIcons>
+  </TrayIcon.Icons>
+
 </Application>

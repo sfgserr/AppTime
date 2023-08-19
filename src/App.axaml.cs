@@ -14,6 +14,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Collections.Generic;
 
 namespace AppTime
@@ -21,6 +22,7 @@ namespace AppTime
     public partial class App : Application
     {
         private IHost _host;
+        private MainWindow _window;
 
         public override void Initialize()
         {
@@ -34,12 +36,27 @@ namespace AppTime
                 _host = CreateHostBuilder().Build();
 
                 BindingPlugins.DataValidators.RemoveAt(0);
-                desktop.MainWindow = _host.Services.GetRequiredService<MainWindow>();
+                _window = _host.Services.GetRequiredService<MainWindow>();
+
+                desktop.MainWindow = _window;
 
                 DataTemplates.Add(_host.Services.GetRequiredService<ViewMapper>());
             }
 
             base.OnFrameworkInitializationCompleted();
+        }
+
+        public void OnExitButtonClicked(object sender, EventArgs e)
+        {
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopApp)
+            {
+                desktopApp.Shutdown();
+            }
+        }
+
+        public void OnIconClicked(object sender, EventArgs e)
+        {
+            _window.Show();
         }
 
         private IHostBuilder CreateHostBuilder()
