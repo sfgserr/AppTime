@@ -6,7 +6,7 @@ namespace AppTime.Helpers
         public static string ConvertIntToTimeFormat(this int seconds)
         {
             int hours = seconds / 3600;
-            seconds %= 3660;
+            seconds %= 3600;
 
             int minutes = seconds / 60;
             seconds %= 60;
