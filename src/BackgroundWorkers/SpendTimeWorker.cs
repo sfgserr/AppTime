@@ -19,27 +19,20 @@ namespace AppTime.BackgroundWorkers
 
         public void StartWork(int index)
         {
-            BackgroundWorker bgWorker = new BackgroundWorker();
-            bgWorker.DoWork += SpendTime;
-
-            bgWorker.RunWorkerAsync(index);
+            Timer timer = new Timer(SpendTime, index, 0, 60000);
         }
 
-        private void SpendTime(object sender, DoWorkEventArgs e)
+        private void SpendTime(object? state)
         {
-            int index = (int)e.Argument;
+            int index = (int)state;
 
-            while (true)
+            if (index >= _appProcessStore.State.Count)
+                return;
+
+            if (_appProcessService.GetCurrentProcesses().Any(pr => pr.ProcessName == _appProcessStore.State[index].Name))
             {
-                if (index >= _appProcessStore.State.Count)
-                    break;
-
-                if (_appProcessService.GetCurrentProcesses().Any(pr => pr.ProcessName == _appProcessStore.State[index].Name))
-                {   
-                    _appProcessStore.State[index].AddTime(1);
-                    _appProcessStore.UpdateState();
-                    Thread.Sleep(900);
-                }
+                _appProcessStore.State[index].AddTime(60);
+                _appProcessStore.UpdateState();
             }
         }
     }
